@@ -3,7 +3,7 @@ uvicorn
 python-jose[cryptography]
 passlib[bcrypt]
 python-dotenv
-google-generativeai
+google-genai
 supabase
-bcrypt
+bcrypt==4.0.1
 python-multipart
