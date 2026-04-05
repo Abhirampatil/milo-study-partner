@@ -1,21 +1,17 @@
 import os
+from groq import Groq
 from dotenv import load_dotenv
 
 load_dotenv()
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 def ask_gemini(prompt: str) -> str:
-    if not GEMINI_API_KEY or GEMINI_API_KEY == "placeholder":
-        return "⚠️ AI features are currently unavailable. The Gemini API key has not been configured yet."
-    
     try:
-        from google import genai
-        client = genai.Client(api_key=GEMINI_API_KEY)
-        response = client.models.generate_content(
-            model="gemini-2.0-flash",
-            contents=prompt
+        response = client.chat.completions.create(
+            model="llama3-8b-8192",
+            messages=[{"role": "user", "content": prompt}]
         )
-        return response.text
+        return response.choices[0].message.content
     except Exception as e:
         return f"⚠️ AI service error: {str(e)}"
