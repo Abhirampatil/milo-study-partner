@@ -20,7 +20,10 @@ def recommend(input: ResourceInput, authorization: str = Header(None)):
     prompt = f"""Recommend the best learning resources for a college student studying: {input.topic}
     
     Include:
-    - YouTube channels or videos
+    - 3 YouTube channels or videos
+    - 3 websites or documentation links
+    - 2 books or textbooks
+    - 2 practice/quiz platforms
     
     Be specific with names and explain why each is useful."""
 
